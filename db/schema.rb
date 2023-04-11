@@ -10,9 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_11_201333) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_11_202332) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "measurements", force: :cascade do |t|
+    t.date "date"
+    t.integer "weight"
+    t.integer "bras"
+    t.integer "poitrine"
+    t.integer "taille"
+    t.integer "hanches"
+    t.integer "cuisses"
+    t.integer "epaules"
+    t.integer "mollets"
+    t.integer "glucides"
+    t.string "photo"
+    t.bigint "phase_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["phase_id"], name: "index_measurements_on_phase_id"
+  end
+
+  create_table "phases", force: :cascade do |t|
+    t.string "type"
+    t.date "started_date"
+    t.date "ended_date"
+    t.integer "period"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_phases_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +51,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_201333) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "size"
+    t.integer "weight"
+    t.string "photo_profile"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "measurements", "phases"
+  add_foreign_key "phases", "users"
 end
