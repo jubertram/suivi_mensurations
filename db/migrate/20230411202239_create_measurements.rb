@@ -12,7 +12,6 @@ class CreateMeasurements < ActiveRecord::Migration[7.0]
       t.integer :mollets
       t.integer :glucides
       t.string :photo
-      t.references :phase, null: false, foreign_key: true
 
       t.timestamps
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_11_202332) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_12_175022) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,18 +26,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_202332) do
     t.integer "mollets"
     t.integer "glucides"
     t.string "photo"
-    t.bigint "phase_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "phase_id"
     t.index ["phase_id"], name: "index_measurements_on_phase_id"
   end
 
   create_table "phases", force: :cascade do |t|
-    t.string "type"
+    t.string "phase_type"
+    t.bigint "user_id", null: false
     t.date "started_date"
     t.date "ended_date"
     t.integer "period"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_phases_on_user_id"
@@ -58,6 +58,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_202332) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "measurements", "phases"
   add_foreign_key "phases", "users"
 end
