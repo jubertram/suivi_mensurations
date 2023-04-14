@@ -4,6 +4,10 @@ class PhasesController < ApplicationController
   end
 
   def show
-    @phases = Phase.find(params[:id])
+    @phase = Phase.find(params[:id])
+  end
+
+  def new
+    @phase = Phase.New
   end
 end

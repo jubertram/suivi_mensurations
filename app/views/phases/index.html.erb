@@ -1,2 +1,7 @@
-<h1>Hello !</h1>
-<h2> <%= @restaurants.last %>  </h2>
+<h1>Bienvenue sur Suivi Mensurations</h1>
+
+<ul>
+  <% @phases.each do |phase| %>
+    <li><%= link_to phase.phase_type, phase_path(phase.id) %> - debut: <%= phase.started_date %></li>
+  <% end %>
+</ul>
