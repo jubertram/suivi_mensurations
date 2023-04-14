@@ -5,3 +5,5 @@
     <li><%= link_to phase.phase_type, phase_path(phase.id) %> - debut: <%= phase.started_date %></li>
   <% end %>
 </ul>
+
+<%= link_to '+', new_phase_path %>

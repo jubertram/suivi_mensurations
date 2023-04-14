@@ -8,6 +8,23 @@ class PhasesController < ApplicationController
   end
 
   def new
-    @phase = Phase.New
+    @phase = Phase.new
+  end
+
+  def create
+    @phase = Phase.new(phase_params)
+    @phase.user = current_user
+    @phase.ended_date = @phase.started_date + @phase.period
+    if @phase.save!
+      redirect_to phases_path, notice: 'une nouvelle phase commence'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def phase_params
+    params.require(:phase).permit(:phase_type, :period, :started_date)
   end
 end
