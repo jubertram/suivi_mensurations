@@ -22,6 +22,17 @@ class PhasesController < ApplicationController
     end
   end
 
+  def edit
+    @phase = Phase.find(params[:id])
+  end
+
+  def update
+    @phase = Phase.find(params[:id])
+    @phase.update(phase_params)
+
+    redirect_to phases_path
+  end
+
   private
 
   def phase_params
