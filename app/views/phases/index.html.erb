@@ -2,7 +2,14 @@
 
 <ul>
   <% @phases.each do |phase| %>
-    <li><%= link_to phase.phase_type, phase_path(phase.id) %> - debut: <%= phase.started_date %></li>
+    <li>
+      <%= link_to phase.phase_type, phase_path(phase.id) %> - debut: <%= phase.started_date %>
+      <%= link_to 'modifier', edit_phase_path(phase.id) %>
+      <%= link_to 'supprimer',
+        phase_path(phase.id),
+        data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
+      %>
+    </li>
   <% end %>
 </ul>
 

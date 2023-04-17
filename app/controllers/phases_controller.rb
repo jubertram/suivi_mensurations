@@ -1,10 +1,11 @@
 class PhasesController < ApplicationController
+  before_action :set_phase, only: %i[show edit update destroy]
+
   def index
     @phases = Phase.all
   end
 
   def show
-    @phase = Phase.find(params[:id])
   end
 
   def new
@@ -14,7 +15,8 @@ class PhasesController < ApplicationController
   def create
     @phase = Phase.new(phase_params)
     @phase.user = current_user
-    @phase.ended_date = @phase.started_date + @phase.period
+    @phase.period ? @phase.started_date + @phase.period : nil
+
     if @phase.save!
       redirect_to phases_path, notice: 'une nouvelle phase commence'
     else
@@ -23,19 +25,25 @@ class PhasesController < ApplicationController
   end
 
   def edit
-    @phase = Phase.find(params[:id])
   end
 
   def update
-    @phase = Phase.find(params[:id])
     @phase.update(phase_params)
-
     redirect_to phases_path
+  end
+
+  def destroy
+    @phase.destroy
+    redirect_to phases_path, status: :see_other
   end
 
   private
 
   def phase_params
     params.require(:phase).permit(:phase_type, :period, :started_date)
+  end
+
+  def set_phase
+    @phase = Phase.find(params[:id])
   end
 end

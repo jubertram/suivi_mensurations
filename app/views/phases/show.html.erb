@@ -1,7 +1,12 @@
 <h1><%= @phase.phase_type %></h1>
 
 
-<%= link_to 'modifier', edit_phase_path %>
+<%= link_to 'modifier', edit_phase_path(@phase) %>
+
+<%= link_to 'supprimer',
+  phase_path,
+  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
+%>
 
 
-<%= link_to 'retour', phases_path %>
+<%= link_to 'retour', phases_path(@phase) %>
