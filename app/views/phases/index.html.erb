@@ -10,7 +10,16 @@
         data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
       %>
     </li>
+
+    <% if phase.measurements != [] %>
+      <% last_measure = phase.measurements.last  %>
+      <h3>Dernieres mesures</h3>
+      <p> Date: <%= last_measure.date %> <br> Poid: <%= last_measure.weight %></p>
+    <% end %>
+
+    <h2>______________________________________________________________</h2>
   <% end %>
 </ul>
 
 <%= link_to '+', new_phase_path %>
+<%= link_to 'nouvelles mensurations', new_phase_measurement_path(@phases.last) %>

@@ -1,0 +1,18 @@
+<h1>Nouvelle Mesure</h1>
+
+<%= simple_form_for [@phase, @measurement] do |f| %>
+  <%= f.input :date, selected: Date.today %>
+  <%= f.input :weight %>
+  <%= f.input :bras %>
+  <%= f.input :poitrine%>
+  <%= f.input :taille%>
+  <%= f.input :hanches %>
+  <%= f.input :cuisses %>
+  <%= f.input :epaules %>
+  <%= f.input :mollets %>
+  <%= f.input :glucides %>
+  <%= f.input :photo %>
+  <%= f.submit 'Ajouter' %>
+<% end %>
+
+<%= link_to 'retour', phases_path %>
