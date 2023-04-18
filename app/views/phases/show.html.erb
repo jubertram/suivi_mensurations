@@ -1,4 +1,4 @@
-<h1><%= @phase.phase_type %></h1>
+<h2><%= @phase.phase_type.capitalize %></h2>
 
 
 <%= link_to 'modifier', edit_phase_path(@phase) %> -
@@ -7,12 +7,51 @@
   data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
 %>
 
-<% if @phase.measurements != []%>
+<br><br>
+
+<% if @phase.measurements != [] %>
   <ul>
-    <% @phase.measurements.each_with_index do |m, i| %>
+    <% @sorted_measurements.each_with_index do |m, i| %>
       <li>
-        date: <%= m.date %> <br>
-        poids: <%= m.weight %> <%= m.weight < @phase.measurements[ i - 1 ].weight ? '<span style="color: green;">ᨈ</span>'.html_safe : '<span style="color: red;">ᨆ</span>'.html_safe %> <br>
+        <h3><%= m.date %></h3>
+
+
+        <% if m.weight != nil  %>
+          poids: <%= m.weight %>kg  <%= progress(m.weight, @phase.measurements[ i - 1 ].weight, i)%><br>
+        <% end %>
+
+        <% if m.bras != nil  %>
+          biceps: <%= m.bras %>cm  <%= progress(m.bras, @phase.measurements[ i - 1 ].bras, i) %><br>
+        <% end %>
+
+        <% if m.poitrine != nil  %>
+          poitrine: <%= m.poitrine %>cm  <%= progress(m.poitrine, @phase.measurements[ i - 1 ].poitrine, i) %><br>
+        <% end %>
+
+        <% if m.taille != nil  %>
+          taille: <%= m.taille %>cm  <%= progress(m.taille, @phase.measurements[ i - 1 ].taille, i) %><br>
+        <% end %>
+
+        <% if m.hanches != nil  %>
+          hanches: <%= m.hanches %>cm  <%= progress(m.hanches, @phase.measurements[ i - 1 ].hanches, i) %><br>
+        <% end %>
+
+        <% if m.cuisses != nil  %>
+          cuisses: <%= m.cuisses %>cm  <%= progress(m.cuisses, @phase.measurements[ i - 1 ].cuisses, i) %><br>
+        <% end %>
+
+        <% if m.epaules != nil  %>
+          epaules: <%= m.epaules %>cm  <%= progress(m.epaules, @phase.measurements[ i - 1 ].epaules, i) %><br>
+        <% end %>
+
+        <% if m.mollets != nil  %>
+          mollets: <%= m.mollets %>cm  <%= progress(m.mollets, @phase.measurements[ i - 1 ].mollets, i) %><br>
+        <% end %>
+
+        <% if m.glucides != nil  %>
+          glucides: <%= m.glucides %>g  <%= progress(m.glucides, @phase.measurements[ i - 1 ].glucides, i) %><br>
+        <% end %>
+
         <%= link_to 'edit', edit_measurement_path(m) %> -
 
         <%= link_to 'supprimer', measurement_path,
@@ -25,7 +64,7 @@
     <% end %>
   </ul>
 <% else %>
-    <p>Ajoute tes premieres mensurations</p>
+    <%= link_to 'Ajoute tes premieres mensurations', new_phase_measurement_path(@phase) %>
 <% end %>
 
 
