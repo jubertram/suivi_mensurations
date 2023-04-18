@@ -1,12 +1,32 @@
 <h1><%= @phase.phase_type %></h1>
 
 
-<%= link_to 'modifier', edit_phase_path(@phase) %>
-
+<%= link_to 'modifier', edit_phase_path(@phase) %> -
 <%= link_to 'supprimer',
   phase_path,
   data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
 %>
+
+<% if @phase.measurements != []%>
+  <ul>
+    <% @phase.measurements.each_with_index do |m, i| %>
+      <li>
+        date: <%= m.date %> <br>
+        poids: <%= m.weight %> <%= m.weight < @phase.measurements[ i - 1 ].weight ? '<span style="color: green;">ᨈ</span>'.html_safe : '<span style="color: red;">ᨆ</span>'.html_safe %> <br>
+        <%= link_to 'edit', edit_measurement_path(m) %> -
+
+        <%= link_to 'supprimer', measurement_path,
+          data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
+        %>
+
+
+
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+    <p>Ajoute tes premieres mensurations</p>
+<% end %>
 
 
 <%= link_to 'retour', phases_path(@phase) %>

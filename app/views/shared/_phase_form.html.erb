@@ -1,6 +1,6 @@
-<%= simple_form_for (phase) do |f| %>
+<%= simple_form_for phase do |f| %>
     <%= f.input :phase_type, collection: Phase::PHASE_TYPE, selected: 'Prise de masse' , label: "Type de phase", include_hidden: false %>
     <%= f.input :period, collection: Phase::PERIOD, label: "Durée souhaitée de la phase (en jours)", selected: 60  %>
     <%= f.input :started_date, selected: Date.today %>
-    <%= f.submit "C'est parti" %>
+    <%= f.submit submit_text %>
   <% end %>

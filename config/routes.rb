@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :phases do
     resources :measurements, only: %i[new create]
   end
+
+  resources :measurements, only: %i[edit update destroy]
   # Defines the root path route ("/")
   # root "articles#index"
 end

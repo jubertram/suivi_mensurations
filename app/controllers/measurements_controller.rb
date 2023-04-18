@@ -1,5 +1,5 @@
 class MeasurementsController < ApplicationController
-  before_action :set_measurement, only: %i[]
+  before_action :set_measurement, only: %i[destroy edit update]
   before_action :set_phase, only: %i[new create]
 
   def new
@@ -11,6 +11,19 @@ class MeasurementsController < ApplicationController
     @measurement.phase = @phase
     @measurement.save
     redirect_to phases_path
+  end
+
+  def edit
+  end
+
+  def update
+    @measurement.update(measurement_params)
+    redirect_to phases_path
+  end
+
+  def destroy
+    @measurement.destroy
+    redirect_to phases_path, status: :see_other
   end
 
   private

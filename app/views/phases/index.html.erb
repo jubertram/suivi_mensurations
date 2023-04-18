@@ -12,10 +12,21 @@
     </li>
 
     <% if phase.measurements != [] %>
-      <% last_measure = phase.measurements.last  %>
-      <h3>Dernieres mesures</h3>
-      <p> Date: <%= last_measure.date %> <br> Poid: <%= last_measure.weight %></p>
+      <ul>
+        <% phase.measurements.each do |m| %>
+          <li>
+            <%= m.date %> -
+            <%= m.weight %>
+            <%= link_to 'edit', edit_measurement_path(m) %> -
+            <%= link_to 'supprimer', measurement_path(m),
+              data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
+            %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
+
+
 
     <h2>______________________________________________________________</h2>
   <% end %>

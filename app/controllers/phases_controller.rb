@@ -2,7 +2,7 @@ class PhasesController < ApplicationController
   before_action :set_phase, only: %i[show edit update destroy]
 
   def index
-    @phases = Phase.all.sort { |a, b| a.started_date <=> b.started_date }
+    @phases = Phase.all.sort { |a, b| b.started_date <=> a.started_date }
   end
 
   def show
