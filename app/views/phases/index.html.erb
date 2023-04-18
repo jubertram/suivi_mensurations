@@ -12,11 +12,12 @@
     </li>
 
     <% if phase.measurements != [] %>
+      <% sorted_measurements = phase.measurements.sort { |a, b| b.date <=> a.date } %>
       <ul>
-        <% phase.measurements.each do |m| %>
+        <% sorted_measurements.each do |m| %>
           <li>
             <%= m.date %> -
-            <%= m.weight %>
+            <%= m.weight%>
             <%= link_to 'edit', edit_measurement_path(m) %> -
             <%= link_to 'supprimer', measurement_path(m),
               data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}

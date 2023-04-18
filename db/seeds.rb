@@ -11,14 +11,14 @@ Phase.destroy_all
 phase = Phase.create!(
   user_id: 6,
   phase_type: 'perte de poids',
-  started_date: Date.today,
+  started_date: '2023-03-20',
   period: 90
 )
 
 measure1 = Measurement.create!(
   phase_id: phase.id,
   date: '2023-03-20',
-  weight: 84,
+  weight: 84.8,
   bras: 37,
   poitrine: 105,
   taille: 89,
@@ -29,7 +29,7 @@ measure1 = Measurement.create!(
 measure2 = Measurement.create!(
   phase_id: phase.id,
   date: '2023-04-03',
-  weight: 83,
+  weight: 83.8,
   bras: 37.5,
   poitrine: 101,
   taille: 88,

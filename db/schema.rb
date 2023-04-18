@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_12_175022) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_18_185910) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "measurements", force: :cascade do |t|
     t.date "date"
-    t.integer "weight"
-    t.integer "bras"
-    t.integer "poitrine"
-    t.integer "taille"
-    t.integer "hanches"
-    t.integer "cuisses"
-    t.integer "epaules"
-    t.integer "mollets"
+    t.float "weight"
+    t.float "bras"
+    t.float "poitrine"
+    t.float "taille"
+    t.float "hanches"
+    t.float "cuisses"
+    t.float "epaules"
+    t.float "mollets"
     t.integer "glucides"
     t.string "photo"
     t.datetime "created_at", null: false
