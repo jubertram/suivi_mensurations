@@ -1,4 +1,26 @@
-<h1>Bienvenue sur Suivi Mensurations</h1>
+<h3>Actuellement en <%= @last_phase.phase_type %></h3>
+
+<p>Derniere mesure -  <%= @last_measurement.date.strftime("%d %B") %></p>
+        <% if @last_measurement.weight != nil  %>
+          poids: <%= @last_measurement.weight %>kg  <%= progress(@last_measurement.weight, @sorted_measurements[ -2 ].weight, -1, @last_phase)%><br>
+        <% end %>
+
+        <% if @last_measurement.bras != nil  %>
+          biceps: <%= @last_measurement.bras %>cm  <%= progress(@last_measurement.bras, @sorted_measurements[ -2 ].bras, -1, @last_phase) %><br>
+        <% end %>
+
+        <% if @last_measurement.poitrine != nil  %>
+          poitrine: <%= @last_measurement.poitrine %>cm  <%= progress(@last_measurement.poitrine, @sorted_measurements[ -2 ].poitrine, -1, @last_phase) %><br>
+        <% end %>
+
+        <% if @last_measurement.taille != nil  %>
+          taille: <%= @last_measurement.taille %>cm  <%= progress(@last_measurement.taille, @sorted_measurements[ -2 ].taille, -1, @last_phase) %><br>
+        <% end %>
+
+        <% if @last_measurement.hanches != nil  %>
+          hanches: <%= @last_measurement.hanches %>cm  <%= progress(@last_measurement.hanches, @sorted_measurements[ -2 ].hanches, -1, @last_phase) %>
+        <% end %>
+
 
 <ul>
   <% @phases.each do |phase| %>

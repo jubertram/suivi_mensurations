@@ -18,7 +18,7 @@ class MeasurementsController < ApplicationController
 
   def update
     @measurement.update(measurement_params)
-    redirect_to phases_path
+    redirect_to phase_path(@measurement.phase)
   end
 
   def destroy

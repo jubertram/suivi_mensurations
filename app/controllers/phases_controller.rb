@@ -4,6 +4,9 @@ class PhasesController < ApplicationController
 
   def index
     @phases = Phase.all.sort { |a, b| b.started_date <=> a.started_date }
+    @last_phase = @phases.first
+    @sorted_measurements = @last_phase.measurements.sort { |a, b| a.date <=> b.date }
+    @last_measurement = @sorted_measurements.last
   end
 
   def show
@@ -39,19 +42,6 @@ class PhasesController < ApplicationController
     redirect_to phases_path, status: :see_other
   end
 
-  def progress(data1, data2, index)
-    data2 = 0 if data2.nil?
-    return unless index != @phase.measurements.size - 1
-
-    if data1 < data2
-      "|  #{round_float((data2 - data1).round(1))} <span style='color: green;'>ᨆ</span>".html_safe
-    elsif data1 > data2
-      "|  #{round_float((data1 - data2).round(1))} <span style='color: red;'>ᨈ</span>".html_safe
-    else
-      "|  <span style='color: blue;'>=</span>".html_safe
-    end
-  end
-
   def round_float(num)
     num.to_s.split('.')[1] == '0' ? num.to_i : num
   end
@@ -64,5 +54,18 @@ class PhasesController < ApplicationController
 
   def set_phase
     @phase = Phase.find(params[:id])
+  end
+
+  def progress(new_data, previous_data, index, phase)
+    previous_data = 0 if previous_data.nil?
+    return unless index != phase.measurements.size - 1
+
+    if new_data < previous_data
+      "|  #{round_float((previous_data - new_data).round(1))} <span style='color: green;'>ᨆ</span>".html_safe
+    elsif new_data > previous_data
+      "|  #{round_float((new_data - previous_data).round(1))} <span style='color: red;'>ᨈ</span>".html_safe
+    else
+      "|  <span style='color: blue;'>=</span>".html_safe
+    end
   end
 end
