@@ -1,4 +1,4 @@
-<h3>Actuellement en <%= @last_phase.phase_type %></h3>
+<h3>Actuellement en <%= link_to @last_phase.phase_type, phase_path(@last_phase) %></h3>
 
 <p>Derniere mesure -  <%= @last_measurement.date.strftime("%d %B") %></p>
         <% if @last_measurement.weight != nil  %>
@@ -21,39 +21,53 @@
           hanches: <%= @last_measurement.hanches %>cm  <%= progress(@last_measurement.hanches, @sorted_measurements[ -2 ].hanches, -1, @last_phase) %>
         <% end %>
 
+        <% if @last_measurement.cuisses != nil  %>
+          cuisses: <%= @last_measurement.cuisses %>cm  <%= progress(@last_measurement.cuisses, @sorted_measurements[ -2 ].cuisses, -1, @last_phase) %><br>
+        <% end %>
 
-<ul>
-  <% @phases.each do |phase| %>
-    <li>
-      <%= link_to phase.phase_type, phase_path(phase.id) %> - debut: <%= phase.started_date %>
-      <%= link_to 'modifier', edit_phase_path(phase.id) %>
-      <%= link_to 'supprimer',
+        <% if @last_measurement.epaules != nil  %>
+          epaules: <%= @last_measurement.epaules %>cm  <%= progress(@last_measurement.epaules, @sorted_measurements[ -2 ].epaules, -1, @last_phase) %><br>
+        <% end %>
+
+        <% if @last_measurement.mollets != nil  %>
+          mollets: <%= @last_measurement.mollets %>cm  <%= progress(@last_measurement.mollets, @sorted_measurements[ -2 ].mollets, -1, @last_phase) %><br>
+        <% end %>
+
+        <% if @last_measurement.glucides != nil  %>
+          glucides: <%= @last_measurement.glucides %>g  <%= progress(@last_measurement.glucides, @sorted_measurements[ -2 ].glucides, -1, @last_phase) %><br>
+        <% end %>
+
+<%# <ul> %>
+  <%# <% @phases.each do |phase| %>
+    <%# <li> %>
+      <%# <%= link_to phase.phase_type, phase_path(phase.id) - debut: <%= phase.started_date %>
+      <%# <%= link_to 'modifier', edit_phase_path(phase.id) %>
+     <%# <%= link_to 'supprimer',
         phase_path(phase.id),
         data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
       %>
-    </li>
+    <%#</li>
 
-    <% if phase.measurements != [] %>
-      <% sorted_measurements = phase.measurements.sort { |a, b| b.date <=> a.date } %>
-      <ul>
+    <%# <% if phase.measurements != [] %>
+      <%#<% sorted_measurements = phase.measurements.sort { |a, b| b.date <=> a.date } %>
+      <%#<ul>
         <% sorted_measurements.each do |m| %>
-          <li>
-            <%= m.date %> -
-            <%= m.weight%>
-            <%= link_to 'edit', edit_measurement_path(m) %> -
-            <%= link_to 'supprimer', measurement_path(m),
+         <%# <li>
+            <%= m.date - %>
+           <%# <%= m.weight%>
+           <%# <%= link_to 'edit', edit_measurement_path(m) - %>
+            <%#<%= link_to 'supprimer', measurement_path(m),
               data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
             %>
-          </li>
+         <%# </li>
         <% end %>
-      </ul>
+      <%#</ul>
     <% end %>
 
 
 
-    <h2>______________________________________________________________</h2>
-  <% end %>
-</ul>
+  <%# <% end %>
+<%# </ul> %>
 
 <%= link_to '+', new_phase_path %>
 <%= link_to 'nouvelles mensurations', new_phase_measurement_path(@phases.last) %>

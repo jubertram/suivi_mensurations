@@ -53,11 +53,11 @@
 
         <%= link_to 'edit', edit_measurement_path(m) %> -
 
-        <%= link_to 'supprimer', measurement_path,
+        <%= link_to 'supprimer', measurement_path(m),
           data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
         %>
       </li>
-        <% x += 1 if x < i %>
+        <% x += 1 if x < @sorted_measurements.size - 1 %>
     <% end %>
   </ul>
 <% else %>
