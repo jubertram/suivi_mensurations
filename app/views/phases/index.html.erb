@@ -69,5 +69,7 @@
   <%# <% end %>
 <%# </ul> %>
 
+<%= line_chart @sorted_measurements.map {|m| [m.date, m.weight] }%>
+
 <%= link_to '+', new_phase_path %>
 <%= link_to 'nouvelles mensurations', new_phase_measurement_path(@phases.last) %>

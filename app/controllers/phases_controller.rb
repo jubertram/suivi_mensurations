@@ -7,6 +7,8 @@ class PhasesController < ApplicationController
     @last_phase = @phases.first
     @sorted_measurements = @last_phase.measurements.sort { |a, b| a.date <=> b.date }
     @last_measurement = @sorted_measurements.last
+
+    @weights = @sorted_measurements.map { |m| m.weight }
   end
 
   def show
