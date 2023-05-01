@@ -1,6 +1,7 @@
-<%= simple_form_for phase do |f| %>
+<%= simple_form_for phase, data: { controller: 'flatpickr' } do |f| %>
     <%= f.input :phase_type, collection: Phase::PHASE_TYPE, selected: 'Prise de masse' , label: "Type de phase", include_hidden: false %>
     <%= f.input :period, collection: Phase::PERIOD, label: "Durée souhaitée de la phase (en jours)", selected: 60  %>
-    <%= f.input :started_date, selected: Date.today %>
+    <%= f.input :started_date, as: :string, input_html: { data: { flatpickr_target: "startTime" } } %>
+    <%= f.input :ended_date, as: :string, input_html: { data: { flatpickr_target: "endTime" } }, wrapper_html: { style: ended_time_display} %>
     <%= f.submit submit_text %>
   <% end %>

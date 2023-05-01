@@ -18,7 +18,7 @@
         <% end %>
 
         <% if @last_measurement.hanches != nil  %>
-          hanches: <%= @last_measurement.hanches %>cm  <%= progress(@last_measurement.hanches, @sorted_measurements[ -2 ].hanches, -1, @last_phase) %>
+          hanches: <%= @last_measurement.hanches %>cm  <%= progress(@last_measurement.hanches, @sorted_measurements[ -2 ].hanches, -1, @last_phase) %><br>
         <% end %>
 
         <% if @last_measurement.cuisses != nil  %>

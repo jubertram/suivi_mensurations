@@ -1,5 +1,5 @@
-<%= simple_form_for params do |f| %>
-  <%= f.input :date, selected: date %>
+<%= simple_form_for params, data: { controller: 'flatpickr' } do |f| %>
+  <%= f.input :date, as: :string, input_html: { data: { flatpickr_target: "startTime" } } %>
   <%= f.input :weight, as: :float %>
   <%= f.input :bras, as: :float %>
   <%= f.input :poitrine, as: :float %>

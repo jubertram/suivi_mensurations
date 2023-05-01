@@ -1,5 +1,5 @@
   <h1>Commence une nouvelle phase</h1>
 
-  <%= render "shared/phase_form", phase: @phase, submit_text: "C'est parti!" %>
+  <%= render "shared/phase_form", phase: @phase, submit_text: "C'est parti!", ended_time_display:'display:none' %>
 
   <%= link_to 'retour', phases_path %>
